@@ -1,0 +1,73 @@
+/* Chatbot.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.chatbot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+}
+
+.chat-window {
+    background-color: #222; /* Dark background for the chat window */
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.chat-message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.chat-message.user {
+    background-color: #4a90e2; /* Blue for user messages */
+    align-self: flex-end;
+}
+
+.chat-message.bot {
+    background-color: #7ed321; /* Green for bot messages */
+    align-self: flex-start;
+}
+
+.chat-input-form {
+    display: flex;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.send-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.send-button:hover {
+    background-color: #357ABD;
+}
