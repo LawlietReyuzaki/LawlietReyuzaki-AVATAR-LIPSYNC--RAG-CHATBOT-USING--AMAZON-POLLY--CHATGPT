@@ -62,22 +62,31 @@ const [currentAudioTime, setCurrentAudioTime] = useState(0); // State to store c
 // const [botResponse, setBotResponse] = useState(""); // Bot response text
 const [greetingControl, setGreetingControl] = useState(false);
 // Controls for playAudio, headFollow, etc.
-var {
-  //playAudio ,
-  script,
-  headFollow,
-  smoothMorphTarget,
-  morphTargetSmoothing,
-} = useControls({
-  //playAudio: PlayAudio ,
-  headFollow: true,
-  smoothMorphTarget: true,
-  morphTargetSmoothing: 0.5,
-  script: {
-    value: "response",
-    options: ["welcome", "pizzas", "HassanKamran", "response"],
-  },
-});
+// var {
+//   //playAudio ,
+//   script,
+//   headFollow,
+//   smoothMorphTarget,
+//   morphTargetSmoothing,
+// } = useControls({
+//   //playAudio: PlayAudio ,
+//   headFollow: true,
+//   smoothMorphTarget: true,
+//   morphTargetSmoothing: 0.5,
+//   script: {
+//     value: "response",
+//     options: ["welcome", "pizzas", "HassanKamran", "response"],
+//   },
+// });
+
+var script = "response"; // Default value for script
+var headFollow = false;    // Set headFollow to true
+var smoothMorphTarget = true; // Set smoothMorphTarget to true
+var morphTargetSmoothing = 0.5; // Set morphTargetSmoothing to 0.5
+
+// You can now use these variables in your component logic
+
+
 
   let audio;
   let lipsync;
@@ -123,27 +132,6 @@ var {
     setText(event.target.value);
   };
 
-  // const synthesizeAndPlay = (Text) => {
-
-  //   alert("called");
-
-
-  //   try {
-  //     const response = axios.post('http://127.0.0.1:5000/synthesize', {
-  //       text: Text,
-  //     });
-  //     alert('fetched!');
-  //     // Create a blob from the audio response
-  //     const audioBlob = new Blob([response.data], { type: 'audio/mpeg' });
-  //     const audioUrl = URL.createObjectURL(audioBlob);
-  //     const audio = new Audio(audioUrl);
-      
-  //     audio.play();
-  //   } catch (error) {
-  //     alert("fucked");
-  //     console.error('Error synthesizing speech:', error);
-  //   }
-  // };
 
 
   // const synthesizeAndPlay = async (Text) => {
@@ -169,6 +157,38 @@ var {
   //   }
   // };
 
+  const synthesizeAndPlay = async (Text) => {
+    try {
+      const response = await fetch('http://13.61.26.215/synthesize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: Text }),
+      });
+  
+      // Check if the response is ok (status in the range 200-299)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      // Get the response as an ArrayBuffer
+      const arrayBuffer = await response.arrayBuffer();
+  
+      // Create a blob from the audio response
+      const audioBlob = new Blob([arrayBuffer], { type: 'audio/mp3' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+  
+      // Play the audio
+      audio.play();
+  
+    } catch (error) {
+      alert("Error playing audio");
+      console.error('Error synthesizing speech:', error);
+    }
+  };
+  
 
 
 
@@ -221,7 +241,7 @@ var {
           //fetchAudio(jawab);
           
           //alert("hi");
-          //synthesizeAndPlay(jawab);
+          synthesizeAndPlay(jawab);
 
           //speakText("Hello, this is Amazon Polly speaking from a React app!");
 
