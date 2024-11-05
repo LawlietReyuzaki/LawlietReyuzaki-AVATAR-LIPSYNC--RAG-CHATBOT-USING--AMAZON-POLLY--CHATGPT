@@ -4,7 +4,7 @@ import { useControls } from "leva";
 import React, {useEffect, useMemo, useRef, useState } from "react";
 import './Chatbot.css'; // Import CSS for styling
 import { saveAs } from "file-saver";
-import axios from 'axios';
+//import axios from 'axios';
 
 
 
@@ -146,28 +146,28 @@ var {
   // };
 
 
-  const synthesizeAndPlay = async (Text) => {
+  // const synthesizeAndPlay = async (Text) => {
   
-    try {
-      const response = await axios.post('http://13.61.26.215/synthesize', {
-        text: Text,
-      }, { responseType: 'arraybuffer' }); // Set responseType to arraybuffer
+  //   try {
+  //     const response = await axios.post('http://13.61.26.215/synthesize', {
+  //       text: Text,
+  //     }, { responseType: 'arraybuffer' }); // Set responseType to arraybuffer
   
-      //alert('fetched!');
+  //     //alert('fetched!');
       
-      // Create a blob from the audio response
-      const audioBlob = new Blob([response.data], { type: 'audio/mp3' });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
+  //     // Create a blob from the audio response
+  //     const audioBlob = new Blob([response.data], { type: 'audio/mp3' });
+  //     const audioUrl = URL.createObjectURL(audioBlob);
+  //     const audio = new Audio(audioUrl);
   
-      // Play the audio
-      audio.play();
+  //     // Play the audio
+  //     audio.play();
   
-    } catch (error) {
-      alert("Error playing audio");
-      console.error('Error synthesizing speech:', error);
-    }
-  };
+  //   } catch (error) {
+  //     alert("Error playing audio");
+  //     console.error('Error synthesizing speech:', error);
+  //   }
+  // };
 
 
 
@@ -221,7 +221,7 @@ var {
           //fetchAudio(jawab);
           
           //alert("hi");
-          synthesizeAndPlay(jawab);
+          //synthesizeAndPlay(jawab);
 
           //speakText("Hello, this is Amazon Polly speaking from a React app!");
 
